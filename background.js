@@ -5,12 +5,11 @@ chrome.runtime.onInstalled.addListener(() => {
   });
   
   const extensions = 'https://developer.chrome.com/docs/extensions'
-const webstore = 'https://developer.chrome.com/docs/webstore'
-  const youtube = 'https://www.youtube.com/'
+  const webstore = 'https://developer.chrome.com/docs/webstore'
   
   // When the user clicks on the extension action
   chrome.action.onClicked.addListener(async (tab) => {
-    if (tab.url.startsWith(extensions) || tab.url.startsWith(webstore) || tab.url.startsWith(youtube)) {
+    if (tab.url.startsWith(extensions) || tab.url.startsWith(webstore)) {
       // We retrieve the action badge to check if the extension is 'ON' or 'OFF'
       const prevState = await chrome.action.getBadgeText({ tabId: tab.id });
       // Next state will always be the opposite
@@ -25,16 +24,15 @@ const webstore = 'https://developer.chrome.com/docs/webstore'
       if (nextState === "ON") {
         // Insert the CSS file when the user turns the extension on
         await chrome.scripting.insertCSS({
-          files: ["ponder.css"],
+          files: ["focus-mode.css"],
           target: { tabId: tab.id },
         });
       } else if (nextState === "OFF") {
         // Remove the CSS file when the user turns the extension off
         await chrome.scripting.removeCSS({
-          files: ["ponder.css"],
+          files: ["focus-mode.css"],
           target: { tabId: tab.id },
         });
       }
     }
   });
-  
