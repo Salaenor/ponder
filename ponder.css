@@ -1,3 +1,5 @@
 * {
   color: blueviolet;
+  pointer-events: none;
+  cursor: default;
 }
