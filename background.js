@@ -5,26 +5,7 @@ chrome.runtime.onInstalled.addListener(() => {
   });
   
   const youtube = 'https://www.youtube.com/'
-//create a document fragment
-let htmlFragment = document.createDocumentFragment();
 
-//create a div element to hold the response
-let tempNode = document.createElement('div');
-
-//add response to the div
-tempNode.innerHTML = response;
-
-//append the <script> tag from the div to the fragment
-htmlFragment.appendChild(tempNode.firstChild);
-
-//select script tag from the fragment now
-let scriptTag = htmlFragment.querySelector('script');
-
-//add class to the <script> tag
-scriptTag.setAttribute('class', 'removeables');
-
-//append the tag to the document body
-$(document.body).append(fragment);
   
   // When the user clicks on the extension action
   chrome.action.onClicked.addListener(async (tab) => {
@@ -45,9 +26,7 @@ $(document.body).append(fragment);
         await chrome.scripting.insertCSS({
           files: ["ponder.css"],
           target: { tabId: tab.id },
-        })
-        $('.removeables').remove();
-        ;
+        });
       } else if (nextState === "OFF") {
         // Remove the CSS file when the user turns the extension off
         await chrome.scripting.removeCSS({
