@@ -4,7 +4,7 @@ chrome.runtime.onInstalled.addListener(() => {
     });
   });
   
-  const youtube = 'https://www.youtube.com/*'
+  const youtube = 'https://www.youtube.com'
   
   // When the user clicks on the extension action
   chrome.action.onClicked.addListener(async (tab) => {
